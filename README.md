@@ -91,6 +91,13 @@ Al hacer click recorremos cada una de las fichas que se muestran en nuestro HTML
 Mediante la nueva funcionalidad pushState podemos cambiar la url de nuestra aplicación sin refrescar la página, esto no funciona en local, si queremos ver su operatividad completa podemos usar la url .......
 En el segundo click volvemos al estado inicial de nuestra aplicación.
 
+### <a name="generaljs">pokeapi.js</a>
+Es el archivo javascript que nos permite encajar todas las piezas de nuestro puzzle. En él instaciamos el objeto de la clase Pokedex y realizamos la operatividad de nuestro buscador de pokemons.
+
+Para ejecutar una búsuqeda sobre los pokemons que mostramos en nuestro HTML añadiremos un eventListener al input de nuestra aplicación on "keyup", en este evento llamaremos a la función pokeSearch() que recibirá como parámetro el valor de nuestro input text.
+
+#### <a name="pokesearch">pokeSearch()</a>
+Mediante esta fucnión recorremos cada una de las fichas que se muestran en nuestro HTML y las ocultamos, mediante indexOf() comparamos el valor que recibimos del input con el nombre de nuestro pokemon para chequear si contiene esos caracteres, en caso afirmativo muestra la tarjeta que coincide con la busqueda.
 
 
 
