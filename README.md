@@ -31,24 +31,48 @@ Contiene todos los archivos scss utilizados para construir nuestra aplicación. 
 Generalmente y en aplicaciones más grandes estos archivos se suelen ordenar en un patrón llamado 7/1 (7 carpetas con nuestras "pequeñas porciones" de scss, 1 archivo general que importe todas las partes ), en nuestro caso y al tratarse de una aplicación pequeña no hemos seguido ese patrón ya que no era necesario.
 
 * **_card**. Contiene los estilos de la plantilla que utilizaremos para dibujar las tarjetas.
-* **_components**. Contiene los estilos de todos los pequeños componentes de nuestra aplicación (notones, campos de formualrio...)
+* **_components**. Contiene los estilos de todos los pequeños componentes de nuestra aplicación (botones, campos de formulario...)
 * **_layout**. Contiene los estilos base de la estructura de nuestra aplicación
 * **_mixins**. Incluye los mixins que utilizaremos en nuesttos archivos scss (Media queries, prejifos de navegadores...)
-* **_placeholders**. Contiene todas las herencias que utilizaremos en nuestras clases.
+* **_extend**. Contiene todas las herencias que utilizaremos en nuestras clases.
 * **_variables**. Incluye las variables scss de nuestra aplicación (colores, fuentes...)
-* **_pokeapi**. Esta será el archivo principal con el cual importemos todos nuestros archivos parciales sass.
+* **_pokeapi**. Este será el archivo principal con el cual importaremos todos nuestros archivos parciales sass.
 
 #### <a name="css">CSS (Hoja de estilos)</a>
-Sass es un preprocesador de estilos CSS que nos permite trabajar fácilmente los estilos de nuestras páginas webs "por partes" y añadirles cierta funcionalidad para más tarde compilarlos en un único archivo css que unificará toda la parte visual y hará que nuestro navegador pueda interpretarlo. Esta dará como resultado un único archivo css, que se muestra en estar carpeta.
+Sass es un preprocesador de estilos CSS que nos permite trabajar fácilmente los estilos de nuestras páginas webs "por partes" y añadirles cierta funcionalidad para más tarde compilarlos en un único archivo css que unificará toda la parte visual y hará que nuestro navegador pueda interpretarlo. Esta dará como resultado un único archivo css, que se muestra en esta carpeta.
 #### <a name="html">HTML (Estructura de la aplicación)</a>
 Este archivo esta formado por index.html. Contiene el código HTML que construye la estructra base de nuestra aplicación, y la estrutura de la tarjeta que utilizaremos como plantilla.
 
 *Estructura base (header, main y card-wrapper)*
-kkkktrozo de estructura
+```
+<header>
+	<input id="find-pokemon" type="text" name="find-pokemon" placeholder="Filtra pokemons por nombre...">
+</header>
+<main>
+	<div class="card-wrapper" id="card-wrapper">
+		<!--Plantilla de mis fichas-->	
+	</div>
+</main>
+```
 
 *Estructura de la plantilla (template)*
-kkkkkkkkkktrozo de estructura
-
+```
+<div class="template card fade-in" id="orig">
+	<div class="card-img">
+		<img src="">
+			<span></span>
+	</div>
+	<div class="card-text">
+		<h2 class="card-name"></h2>
+		<div class="pokemon-type">
+		</div>
+		<div class="evolution-info">
+			<span>Evoluciona de:</span>
+			<h3 class="pokemon-base"></h3>
+		</div>
+	</div>
+</div>
+```
 #### <a name="js">Javascript (Funcionalidad de la aplicación)</a>
 Es la carpeta que aloja nuestros archivos js, separados en 3 bloques de código esenciales.
 * Pokedex.js
@@ -63,16 +87,13 @@ Contiene la clase que inicializa nuestra aplicación. Entre otros parámetros qu
 
 
 #### <a name="init">init()</a>
-Por medio de init hacemos la llamada a la pokeapi en el momento que instaciamos nuestra clase Pokedex. La llamada se realiza mediante un try/catch para detectar el éxito o el fracaso a la hora de conectar con la url de la api.
+Por medio de init hacemos la llamada a la pokeapi en el momento que instaciamos nuestra clase Pokedex. La llamada se realiza mediante un `try/catch` para detectar el éxito o el fracaso a la hora de conectar con la url de la API.
 
-En el método try utilizamos la nueva funcionalidad fetch() que permite llamadas asincronas para traernos los datos, una vez conectados a la url utilizamos los callbacks .then para operar con esos datos.
+Por medio de `fetch()` realizamos una llamada asíncrona para traernos los datos, una vez conectados, utilizamos los callbacks `.then` para operar con los datos devueltos.
 
 El primer callback nos trae los datos de la api en formato json.
---------codigo
 
-El segundo, nos permite operar con esos datos, en nuestro caso, recorremos los resultados de la petición (trae un paquete de 20 objetos pokemon cada vez) y en cada iteración creamos nuestro propio objeto pokemon para guardarlo en el array que hemos creado vacío en el constructor de nuestra clase.
-
-Mediante catch detectamos el fallo en caso de errores y podemos utilizar una función que se ejecute en caso de fallo en la conexión con la api.
+El segundo, nos permite operar con esos datos, en nuestro caso, recorremos los resultados de la petición (trae un paquete de 20 objetos pokemon cada vez) y en cada iteración creamos nuestro propio objeto pokémon para guardarlo en el array que hemos creado vacío en el constructor de nuestra clase.
 
 #### <a name="init">initEvolutionBase()</a>
 En este método completamos la información de nuestros pokémons con una nueva llamada a la API. Como estas llamadas son asíncronas debemos esperar a que finalice la última de ellas para primero, ordenar y luego "pintar" o renderizar nuestra lista de pokémons.
@@ -80,38 +101,30 @@ En este método completamos la información de nuestros pokémons con una nueva 
 
 ### <a name="pokemon">Pokemon.js</a>
 Contiene la clase que permitirá construir nuestro objeto pokémon.
-En el constructor de la clase le pasaremos los parámetros básicos id y name. También guardamos la url de las imágenes que se encuentran alojadas en un servidor distinto al de la api y creamos un array vacío para almacenar los tipos de nuestro pokémon. Estos tipos los "seteamos" en la clase Pokedex, comentada anteriormente, a la hora de crear cada una de nuestras fichas de pokémons.
+
+En el constructor de la clase le pasaremos los parámetros básicos `id` y `name`. También guardamos la url de las imágenes que se encuentran alojadas en un servidor distinto al de la API y creamos un array vacío para almacenar los tipos de nuestros pokémon. Estos tipos los "seteamos" en la clase Pokedex, comentada anteriormente, a la hora de crear cada una de nuestras fichas de pokémons.
 #### <a name="getid">Getters y setters</a>
 Por medio de estos métodos básicos, obtenemos y manipulamos los datos del pokémon.
 #### <a name="render">renderCard()</a>
-Es el método que nos permite "dibujar" cada una de nuestras tarjetas con la información de nuestros pokemons, para ello utilizamos como estructura base el div.template que hemos construido previamente en nuestro index.html y lo clonamos tantas veces como pokemons queramos mostrar en nuestra aplicación.
-En este método seleccionamos cada uno de los divs que contendrán los datos que queremos mostrar, por medio del método queryselector(), introducimos los datos por medio de innerText() en formato texto plano y la url de las imágenes.
-Una vez que hemos llenado nuestros divs de datos cambiaremos el estilo de nuestro template a display:block (ya que previamente estaba oculto para que inicialmente no se viera) y finalmente mediante el método appendChild() incrustamos nuestro template en la estructura HTML.
+Es el método que nos permite "dibujar" cada una de nuestras tarjetas con la información de nuestros pokémon, para ello utilizamos como estructura base el `div.template` que hemos construido previamente en nuestro index.html y lo clonamos tantas veces como pokémon queramos mostrar en nuestra aplicación.
+En este método seleccionamos cada uno de los `div` que contendrán los datos que queremos mostrar, por medio del método `queryselector()`, introducimos los datos por medio de `innerText()` en formato texto plano y la url de las imágenes.
+Una vez que hemos llenado nuestros divs de datos cambiaremos el estilo de nuestro template a `display:block` (ya que previamente estaba oculto para que inicialmente no se viera) y finalmente mediante el método `appendChild()` incrustamos nuestro template en la estructura HTML.
 
 #### <a name="evento1">El evento click en las fichas</a>
-Cada una de las fichas renderizadas en nuestra api tiene un evento click que nos permite ocultar las demás fichas y mostrar únicamente aquella sobre la que hemos clickado, del mismo modo cambiamos la url cada vez que ocurre este evento con el nombre del pokemon seleccionado.
-Al hacer click recorremos cada una de las fichas que se muestran en nuestro HTML, mostramos la que ha recibido el evento y ocultamos mediante display:none todas las demás.
-Mediante la función pushState del objeto history podemos cambiar la url de nuestra aplicación sin refrescar la página, esto puede no funcionar en un servidor local, debido a las cabeceras, puede devolver un error Origin "null", si queremos ver su operatividad completa podemos usar la url [lovethepixel.es/pokeapi](https://lovethepixel.es/pokeapi)
+Cada una de las fichas renderizadas en nuestra API tiene un evento click que nos permite ocultar las demás fichas y mostrar únicamente aquella sobre la que hemos clickado, del mismo modo cambiamos la url cada vez que ocurre este evento con el nombre del pokémon seleccionado.
+Al hacer click recorremos cada una de las fichas que se muestran en nuestro HTML, mostramos la que ha recibido el evento y ocultamos mediante `display:none` todas las demás.
+Mediante la función `pushState()` del objeto history podemos cambiar la url de nuestra aplicación sin refrescar la página, esto puede no funcionar en un servidor local, debido a las cabeceras, puede devolver un error `Origin "null"`, si queremos ver su operatividad completa podemos usar la url [lovethepixel.es/pokeapi](https://lovethepixel.es/pokeapi)
 En el segundo click sobre la ficha volvemos al estado inicial de nuestra aplicación.
 
 ### <a name="generaljs">pokeapi.js</a>
-Es el archivo javascript que nos permite encajar todas las piezas de nuestro puzzle. En él instaciamos el objeto de la clase Pokedex y realizamos la operatividad de nuestro buscador de pokemons.
+Es el archivo javascript que nos permite encajar todas las piezas de nuestro puzzle. En él instaciamos el objeto de la clase Pokedex y realizamos la operatividad de nuestro buscador de pokémon.
 
-Aunque lo lógico sería realizar la búsqueda sobre el array de pokémons de la clase Pokedex, hemos optado por hacerlo en este archivo ya que según el enunciado solo hay que buscar sobre los pokémons mostrados en nuestro HTML. De esta manera, restringimos la búsqueda a si los elementos son visibles o no lo son a cada caracter pulsado. Es una búsqueda más eficiente, de otro modo nos veríamos obligados a recorrer el array de pokémons completo cada vez.
+Aunque lo lógico sería realizar la búsqueda sobre el array de pokémon de la clase Pokedex, hemos optado por hacerlo en este archivo ya que según el enunciado solo hay que buscar sobre los pokémon mostrados en nuestro HTML. De esta manera, restringimos la búsqueda a si los elementos son visibles o no lo son a cada caracter pulsado. Es una búsqueda más eficiente, de otro modo nos veríamos obligados a recorrer el array de pokémons completo cada vez.
 
-Para ejecutar una búsqueda sobre los pokemons que mostramos en nuestro HTML añadiremos un eventListener al input de nuestra aplicación on "keyup", en este evento llamaremos a la función pokeSearch() que recibirá como parámetrosel el valor de nuestro input text y si está pulsado o no, el caracter 'backspace'.
+Para ejecutar una búsqueda sobre los pokémon que mostramos en nuestro HTML añadiremos un `eventListener` al `input` de nuestra aplicación on "keyup", en este evento llamaremos a la función `pokeSearch()` que recibirá como parámetros el valor de nuestro input text y si está pulsado o no, el caracter 'backspace'.
 
 #### <a name="pokesearch">pokeSearch()</a>
-Mediante esta función chequeamos las fichas visibles o invisibles (dependiendo de si la tecla pulsada es backspace) y mostramos u ocultamos las fichas que correspondan. Mediante indexOf() comparamos el valor que recibimos del input con el nombre de nuestro pokémon para chequear si contiene esos caracteres al inicio, en caso afirmativo muestra la tarjeta que coincide con la búsqueda.
-
-
-
-
-
-
-
-
-
+Mediante esta función chequeamos las fichas visibles o invisibles (dependiendo de si la tecla pulsada es backspace) y mostramos u ocultamos las fichas que correspondan. Mediante `indexOf()` comparamos el valor que recibimos del input con el nombre de nuestro pokémon para chequear si contiene esos caracteres al inicio, en caso afirmativo muestra la tarjeta que coincide con la búsqueda.
 
 _______________________
 
