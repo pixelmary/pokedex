@@ -13,7 +13,9 @@
 
 [3. Funcionalidad de la aplicación
 ](#funcionalidad)
-
+* [Pokedex.js](#pokedex)
+* [Pokemon.js](#pokemon)
+* [pokeapi.js](#generaljs)
 
 
 ## <a name="enunciado">1. Lógica del ejercicio</a>
@@ -56,10 +58,11 @@ Es la carpeta que aloja nuestros archivos js, separados en 3 bloques de código 
 Comentamos más adelante cada una para desarrollarla con más claridad en la sección Funcionalidad de la aplicación.
 
 ## <a name="funcionalidad">3. Funcionalidad de la aplicación</a>
-#### <a name="pokedex">Pokedex.js</a>
+### <a name="pokedex">Pokedex.js</a>
 Contiene la clase que inicializa nuestra aplicación. En el constructor de la misma le pasamos la url de la API a la que debemos conectar, instanciamos un objeto Array en el que guardaremos los pokemons que traigamos de la API para poder operar con ellos más fácilmente e inicializamos la llamada a la API.
 
-El método init().
+
+#### <a name="init">init()</a>
 Por medio de init hacemos la llamada a la pokeapi en el momento que instaciamos nuestra clase Pokedex. La llamada se realiza mediante un try/catch para detectar el éxito o el fracaso a la hora de conectar con la url de la api.
 
 En el método try utilizamos la nueva funcionalidad fetch() que permite llamadas asincronas para traernos los datos, una vez conectados a la url utilizamos los callbacks .then para operar con esos datos.
@@ -71,7 +74,31 @@ El segundo, nos permite operar con esos datos, en nuestro caso recorremos el arr
 
 Mediante catch detectamos el fallo en caso de errores y podemos utilizar una función que se ejecute en caso de fallo en la conexión con la api.
 
--- 
+### <a name="pokemon">Pokemon.js</a>
+Contiene la clase que permitirá construir nuestro objeto pokemon.
+En el constructor de la clase le pasaremos los parámetros id, name y .... También llamamos a la url de las imágenes que se encuentran alojadas en un servidor distinto al de la api y creamos un array vacío para almacenar los tipos de nuestro pokémon. Estos tipos los "seteamos" en la clase Pokedex, comentada anteriormente, a la hora de crear cada una de nuestras fichas de pokemons.
+#### <a name="getid">getId() y setType()</a>
+Por medio del método getId, simplemente retornamos el id de nuestro pokemons para poder operar con él más adelante.
+Con el método setType() podremos introducir en nuestro array de tipos, creado en el constructor el tipo que tiene cada uno de neustros obejtos pokemon.
+#### <a name="getid">renderCard()</a>
+Es el método que nos permite "dibujar" cada una de nuestras tarjetas con la información de nuestros pokemons, para ello utilizamos como estructura base el div.template que hemos construido previamente en nuestro index.html y lo clonamos tantas veces como pokemons queramos mostrar en nuestra aplicación.
+En este método seleccionamos cada uno de los divs que contendrna los datos que queremos mostrar por medio del método queryselector(), introducimos los datos por medio de innerText() en formato texto plano y la url de las imágenes.
+Una vez que hemos llenado nuestros divs de datos cambiaremos el estilo de nuestro template a display:block (ya que previamente estaba oculto para que inicialmente no se viera) y finalmente mediante el método appendChild() incrustamos nuestro template en la estructura HTML.
+
+#### <a name="evento1">El evento click en las fichas</a>
+Cada una de las fichas renderizadas en nuestra api tiene un evento click que nos permite ocultar las demás fichas y mostrar únicamente aquella sobre la que hemos clickado, del mismo modo cambiamos la url cada vez que ocurre este evento con el nombre del pokemon seleccionado.
+Al hacer click recorremos cada una de las fichas que se muestran en nuestro HTML, mostramos la que ha recibido el evento y ocultamos mediante display:none todas las demás.
+Mediante la nueva funcionalidad pushState podemos cambiar la url de nuestra aplicación sin refrescar la página, esto no funciona en local, si queremos ver su operatividad completa podemos usar la url .......
+En el segundo click volvemos al estado inicial de nuestra aplicación.
+
+
+
+
+
+
+
+
+
 _______________________
 
 María Hojas Sánchez
