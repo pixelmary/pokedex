@@ -59,7 +59,7 @@ Comentamos más adelante cada una para desarrollarla con más claridad en la sec
 
 ## <a name="funcionalidad">3. Funcionalidad de la aplicación</a>
 ### <a name="pokedex">Pokedex.js</a>
-Contiene la clase que inicializa nuestra aplicación. En el constructor de la misma le pasamos la url de la API a la que debemos conectar, instanciamos un objeto Array en el que guardaremos los pokemons que traigamos de la API para poder operar con ellos más fácilmente e inicializamos la llamada a la API.
+Contiene la clase que inicializa nuestra aplicación. Entre otros parámetros que inicializamos en el constructor, tenemos la url de la API a la que debemos conectar, y un objeto Array en el que guardaremos los pokemons que traigamos de la API para poder operar con ellos más fácilmente. Finalmente inicializamos la llamada a la API.
 
 
 #### <a name="init">init()</a>
@@ -70,34 +70,41 @@ En el método try utilizamos la nueva funcionalidad fetch() que permite llamadas
 El primer callback nos trae los datos de la api en formato json.
 --------codigo
 
-El segundo, nos permite operar con esos datos, en nuestro caso recorremos el array pokemons.results (trae un paquete de 20 objetos pokemon cada vez) y creamos nuestro propio objeto pokemon para introducirlo mediante push() en el array que hemos creado vacío en el constructor de nuestra clase.
+El segundo, nos permite operar con esos datos, en nuestro caso, recorremos los resultados de la petición (trae un paquete de 20 objetos pokemon cada vez) y en cada iteración creamos nuestro propio objeto pokemon para guardarlo en el array que hemos creado vacío en el constructor de nuestra clase.
 
 Mediante catch detectamos el fallo en caso de errores y podemos utilizar una función que se ejecute en caso de fallo en la conexión con la api.
 
+#### <a name="init">initEvolutionBase()</a>
+En este método completamos la información de nuestros pokémons con una nueva llamada a la API. Como estas llamadas son asíncronas debemos esperar a que finalice la última de ellas para primero, ordenar y luego "pintar" o renderizar nuestra lista de pokémons.
+
+
 ### <a name="pokemon">Pokemon.js</a>
-Contiene la clase que permitirá construir nuestro objeto pokemon.
-En el constructor de la clase le pasaremos los parámetros id, name y .... También llamamos a la url de las imágenes que se encuentran alojadas en un servidor distinto al de la api y creamos un array vacío para almacenar los tipos de nuestro pokémon. Estos tipos los "seteamos" en la clase Pokedex, comentada anteriormente, a la hora de crear cada una de nuestras fichas de pokemons.
-#### <a name="getid">getId() y setType()</a>
-Por medio del método getId, simplemente retornamos el id de nuestro pokemons para poder operar con él más adelante.
-Con el método setType() podremos introducir en nuestro array de tipos, creado en el constructor el tipo que tiene cada uno de neustros obejtos pokemon.
-#### <a name="getid">renderCard()</a>
+Contiene la clase que permitirá construir nuestro objeto pokémon.
+En el constructor de la clase le pasaremos los parámetros básicos id y name. También guardamos la url de las imágenes que se encuentran alojadas en un servidor distinto al de la api y creamos un array vacío para almacenar los tipos de nuestro pokémon. Estos tipos los "seteamos" en la clase Pokedex, comentada anteriormente, a la hora de crear cada una de nuestras fichas de pokémons.
+#### <a name="getid">Getters y setters</a>
+Por medio de estos métodos básicos, obtenemos y manipulamos los datos del pokémon.
+#### <a name="render">renderCard()</a>
 Es el método que nos permite "dibujar" cada una de nuestras tarjetas con la información de nuestros pokemons, para ello utilizamos como estructura base el div.template que hemos construido previamente en nuestro index.html y lo clonamos tantas veces como pokemons queramos mostrar en nuestra aplicación.
-En este método seleccionamos cada uno de los divs que contendrna los datos que queremos mostrar por medio del método queryselector(), introducimos los datos por medio de innerText() en formato texto plano y la url de las imágenes.
+En este método seleccionamos cada uno de los divs que contendrán los datos que queremos mostrar, por medio del método queryselector(), introducimos los datos por medio de innerText() en formato texto plano y la url de las imágenes.
 Una vez que hemos llenado nuestros divs de datos cambiaremos el estilo de nuestro template a display:block (ya que previamente estaba oculto para que inicialmente no se viera) y finalmente mediante el método appendChild() incrustamos nuestro template en la estructura HTML.
 
 #### <a name="evento1">El evento click en las fichas</a>
 Cada una de las fichas renderizadas en nuestra api tiene un evento click que nos permite ocultar las demás fichas y mostrar únicamente aquella sobre la que hemos clickado, del mismo modo cambiamos la url cada vez que ocurre este evento con el nombre del pokemon seleccionado.
 Al hacer click recorremos cada una de las fichas que se muestran en nuestro HTML, mostramos la que ha recibido el evento y ocultamos mediante display:none todas las demás.
-Mediante la nueva funcionalidad pushState podemos cambiar la url de nuestra aplicación sin refrescar la página, esto no funciona en local, si queremos ver su operatividad completa podemos usar la url .......
-En el segundo click volvemos al estado inicial de nuestra aplicación.
+Mediante la función pushState del objeto history podemos cambiar la url de nuestra aplicación sin refrescar la página, esto puede no funcionar en un servidor local, debido a las cabeceras, puede devolver un error Origin "null", si queremos ver su operatividad completa podemos usar la url [lovethepixel.es/pokeapi](https://lovethepixel.es/pokeapi)
+En el segundo click sobre la ficha volvemos al estado inicial de nuestra aplicación.
 
 ### <a name="generaljs">pokeapi.js</a>
 Es el archivo javascript que nos permite encajar todas las piezas de nuestro puzzle. En él instaciamos el objeto de la clase Pokedex y realizamos la operatividad de nuestro buscador de pokemons.
 
-Para ejecutar una búsuqeda sobre los pokemons que mostramos en nuestro HTML añadiremos un eventListener al input de nuestra aplicación on "keyup", en este evento llamaremos a la función pokeSearch() que recibirá como parámetro el valor de nuestro input text.
+Aunque lo lógico sería realizar la búsqueda sobre el array de pokémons de la clase Pokedex, hemos optado por hacerlo en este archivo ya que según el enunciado solo hay que buscar sobre los pokémons mostrados en nuestro HTML. De esta manera, restringimos la búsqueda a si los elementos son visibles o no lo son a cada caracter pulsado. Es una búsqueda más eficiente, de otro modo nos veríamos obligados a recorrer el array de pokémons completo cada vez.
+
+Para ejecutar una búsqueda sobre los pokemons que mostramos en nuestro HTML añadiremos un eventListener al input de nuestra aplicación on "keyup", en este evento llamaremos a la función pokeSearch() que recibirá como parámetrosel el valor de nuestro input text y si está pulsado o no, el caracter 'backspace'.
 
 #### <a name="pokesearch">pokeSearch()</a>
-Mediante esta fucnión recorremos cada una de las fichas que se muestran en nuestro HTML y las ocultamos, mediante indexOf() comparamos el valor que recibimos del input con el nombre de nuestro pokemon para chequear si contiene esos caracteres, en caso afirmativo muestra la tarjeta que coincide con la busqueda.
+Mediante esta función chequeamos las fichas visibles o invisibles (dependiendo de si la tecla pulsada es backspace) y mostramos u ocultamos las fichas que correspondan. Mediante indexOf() comparamos el valor que recibimos del input con el nombre de nuestro pokémon para chequear si contiene esos caracteres al inicio, en caso afirmativo muestra la tarjeta que coincide con la búsqueda.
+
+
 
 
 
