@@ -1,0 +1,31 @@
+%place-content {
+	max-width: $max-app-width;
+	width: 100%;
+	margin: auto;
+	padding: 1.2rem
+}
+
+%triangle {
+	position: fixed;
+	z-index: -1;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 80px 80px 0 0;
+	border-color: $black-color transparent transparent transparent;
+	line-height: 0px;
+	_border-color: black;
+	_filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+}
+
+%portion{
+	width: 80px;
+	position: fixed;
+	bottom: 0
+}
+
+%shadow {
+	-webkit-box-shadow: 0px 1px 7px 1px rgba(0,0,0,0.29);
+	-moz-box-shadow: 0px 1px 7px 1px rgba(0,0,0,0.29);
+	box-shadow: 0px 1px 7px 1px rgba(0,0,0,0.29);
+}

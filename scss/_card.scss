@@ -1,0 +1,87 @@
+.card {
+
+	@extend %shadow;
+	margin-bottom: 3%;
+	animation-name: fade-in;
+	animation-fill-mode: both;
+	animation-duration: .5s;
+
+	.card-img{
+		background: $grey-color;
+		text-align: center;
+		min-height: 130px;
+		position: relative;
+
+		span{
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			background: $grey-color-darker;
+			padding: 4px;
+			min-width: 50px;
+			font-size: 0.8rem;
+
+
+			&:before{
+				content: "ID/";
+			}
+		}
+	}
+
+	.card-text{
+		background: $white-color;
+		padding: 1rem;
+		min-height: 150px;
+
+		&:hover{
+			cursor: pointer;
+
+			.card-name {
+				color: $second-color;
+			}
+		}
+
+		.card-name{
+			text-transform: capitalize;
+			margin-top: 0;
+			margin-bottom: 10px;
+
+		}
+
+		.evolution-info{
+			margin-top: 10px;
+			border-left: 3px solid black;
+    		padding-left: 10px;
+
+			.pokemon-base{
+				text-transform: capitalize
+			}
+		}
+	}
+
+	@include md-screen {
+		width: 31.2%;
+  		flex-grow: 0;
+	}
+
+}
+
+.card-wrapper.one-card .card{
+	flex-grow: 1
+}
+
+.visible{
+	display: block;
+}
+
+$animationDelay: 1;
+@for $i from 1 through 15 {
+	.card-wrapper .card:nth-of-type(#{$i}) {
+		animation-delay: #{0.3+($i)/30}s;
+  }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}

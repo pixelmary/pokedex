@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		<title>Pokeapi</title>
+		<link rel="stylesheet" type="text/css" href="css/pokeapi.css">
+	</head>
+	<body>
+<!--Estos detalles gráficos pueden resolverse por medio divs o incrustando svgs
+	he optado por hacer las dos opciones-->
+		<span id="triangle-1"></span>
+		<span id="triangle-2"></span>
+		<svg version="1.1" id="portion-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 viewBox="0 0 46.2 46.5" enable-background="new 0 0 46.2 46.5" xml:space="preserve">
+		<path fill="#F62515" d="M0,0.7v45.8h45.4c0-0.1,0-0.1,0-0.2C45.4,21.2,25.1,0.8,0,0.7z"/>
+		</svg>
+		<svg version="1.1" id="portion-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 viewBox="0 0 46.2 46.5" enable-background="new 0 0 46.2 46.5" xml:space="preserve">
+		<path fill="#F62515" d="M0,0.7v45.8h45.4c0-0.1,0-0.1,0-0.2C45.4,21.2,25.1,0.8,0,0.7z"/>
+		</svg>
+		<header>
+			<input id="find-pokemon" type="text" name="find-pokemon" placeholder="Filtra pokemons por nombre...">
+		</header>
+		<main>
+			<div class="not-found">
+				No hemos encontrado ningún Pokémon
+			</div>
+			<div class="card-wrapper" id="card-wrapper">
+			<!--Plantilla de mis fichas-->
+				<div class="template card fade-in" id="orig">
+					<div class="card-img">
+						<img src="">
+						<span></span>
+					</div>
+				  	<div class="card-text">
+				    	<h2 class="card-name"></h2>
+				    	<div class="pokemon-type">
+				    	</div>
+				    	<div class="evolution-info">
+				    		<span>Evoluciona de:</span>
+				    		<h3 class="pokemon-base"></h3>
+				    	</div>
+				  	</div>
+				</div>
+			<!--/Plantilla-->
+			</div>
+		</main>
+	</body>
+</html>
+<script type="text/javascript" src="js/Pokedex.js"></script>
+<script type="text/javascript" src="js/Pokemon.js"></script>
+<script type="text/javascript" src="js/pokeapi.js"></script>

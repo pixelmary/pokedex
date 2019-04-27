@@ -1,0 +1,50 @@
+/**
+  *Mobile First Media Queries
+==================================*/
+
+// Dispositivos pequeños
+@mixin sm-screen {
+   @media (min-width: #{$device-sm}) {
+       @content;
+   }
+}
+
+// Dispositivos medianos
+@mixin md-screen {
+   @media (min-width: #{$device-sm}) {
+       @content;
+   }
+}
+
+// Dispositivos grandes
+@mixin lg-screen {
+   @media (min-width: #{$device-lg}) {
+       @content;
+   }
+}
+
+// Dispositivos muy grandes
+@mixin xl-screen {
+   @media (min-width: #{$device-xl}) {
+       @content;
+   }
+}
+
+/**
+  * Prefijos
+==================================*/
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+}
+
+@mixin rotate($degrees) {
+   -moz-transform: rotate($degrees);  
+     -o-transform: rotate($degrees);  
+-webkit-transform: rotate($degrees);
+           filter:  progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
+       -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+             zoom: 1;
+}

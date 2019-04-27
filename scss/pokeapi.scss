@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow');
+
+/** Importo Normalize para resetear mi css  */
+@import "vendor/normalize";
+
+/** Variables base, placeholders y mixins de mi aplicación  */
+@import "variables";
+@import "extends";
+@import "mixins";
+
+/** Estructura base de mi aplicación */
+@import "layout";
+@import "card";
+@import "components";

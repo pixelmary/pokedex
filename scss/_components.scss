@@ -1,0 +1,18 @@
+input#find-pokemon {
+	width: 100%;
+	padding: 0;
+	border: none;
+	background: rgba(256,256,256,0.9);
+	padding: 15px;
+	@extend %shadow;
+}
+
+.pokemon-type span{
+	border: 1px solid $grey-color;
+	text-transform: uppercase;
+	color: $grey-color;
+	font-size: 0.7rem;
+	margin-right: 3px;
+	padding: 3px;
+	@include border-radius(5px);
+}
