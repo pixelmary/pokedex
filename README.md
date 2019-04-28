@@ -36,7 +36,7 @@ Generalmente y en aplicaciones más grandes estos archivos se suelen ordenar en 
 * **_mixins**. Incluye los mixins que utilizaremos en nuesttos archivos scss (Media queries, prejifos de navegadores...)
 * **_extend**. Contiene todas las herencias que utilizaremos en nuestras clases.
 * **_variables**. Incluye las variables scss de nuestra aplicación (colores, fuentes...)
-* **_pokeapi**. Este será el archivo principal con el cual importaremos todos nuestros archivos parciales sass.
+* **pokeapi**. Este será el archivo principal con el cual importaremos todos nuestros archivos parciales sass.
 
 #### <a name="css">CSS (Hoja de estilos)</a>
 Sass es un preprocesador de estilos CSS que nos permite trabajar fácilmente los estilos de nuestras páginas webs "por partes" y añadirles cierta funcionalidad para más tarde compilarlos en un único archivo css que unificará toda la parte visual y hará que nuestro navegador pueda interpretarlo. Esta dará como resultado un único archivo css, que se muestra en esta carpeta.
